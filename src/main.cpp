@@ -13,6 +13,12 @@
 #define RESET_TIMER_MS 2000 // time before the LEDs turn off
 #define DEAD_TIMER_MS 1000 // time after leds turn off before checking for correct value
 
+#define TRANSMIT_LONG_ADDRESS 0x600
+#define TRANSMIT_SHORT_ADDRESS 0x601
+
+#define RECEIVE_LONG_ADDRESS 0x600
+#define RECEIVE_SHORT_ADDRESS 0x601
+
 VirtualTimerGroup timer_group{};
 ESPCAN can_bus{};
 
@@ -25,19 +31,19 @@ MakeUnsignedCANSignal(uint8_t, 16, 8, 1, 0) uint8_rx_signal{};
 MakeUnsignedCANSignal(bool, 24, 1, 1, 0) bool_rx_signal{};
 
 CANTXMessage<2> long_tx_message{
-    can_bus, 0x600, 3, 100, timer_group, float_tx_signal, uint8_tx_signal}; // long tx message to send float and int
+    can_bus, TRANSMIT_LONG_ADDRESS, 3, 100, timer_group, float_tx_signal, uint8_tx_signal}; // long tx message to send float and int
 
 CANTXMessage<1> short_tx_message{
-    can_bus, 0x601, 1, 100, timer_group, bool_tx_signal}; // short tx message to send bool
+    can_bus, TRANSMIT_SHORT_ADDRESS, 1, 100, timer_group, bool_tx_signal}; // short tx message to send bool
 
 CANRXMessage<2> long_rx_message{can_bus,
-                           0x600,
+                           RECEIVE_LONG_ADDRESS,
                            []() { Serial.println("long tx received"); },
                            float_rx_signal,
                            uint8_rx_signal}; // long rx message to receive float and int
 
 CANRXMessage<1> short_rx_message{can_bus,
-                           0x601,
+                           RECEIVE_SHORT_ADDRESS,
                            []() { Serial.println("short tx received"); },
                            bool_rx_signal}; // short rx message to receive bool
 
