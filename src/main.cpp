@@ -6,9 +6,9 @@
 #define UINT8_LED_PIN 17
 #define BOOL_LED_PIN 18
 
-#define TARGET_VAL_FLOAT 0.0 // set these values depending on what you want to receive
-#define TARGET_VAL_UINT8 0
-#define TARGET_VAL_BOOL false
+#define TARGET_VAL_FLOAT 5.0 // set these values depending on what you want to receive
+#define TARGET_VAL_UINT8 1
+#define TARGET_VAL_BOOL true
 
 #define RESET_TIMER_MS 2000 // time before the LEDs turn off
 #define DEAD_TIMER_MS 1000 // time after leds turn off before checking for correct value
@@ -16,7 +16,7 @@
 #define TRANSMIT_LONG_ADDRESS 0x600
 #define TRANSMIT_SHORT_ADDRESS 0x601
 
-#define RECEIVE_LONG_ADDRESS 0x600
+#define RECEIVE_LONG_ADDRESS 0x300
 #define RECEIVE_SHORT_ADDRESS 0x601
 
 VirtualTimerGroup timer_group{};
